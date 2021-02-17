@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:07.000
+Hello. My name is John Doe. Welcome to
+
+00:00:07.000 --> 00:00:11.890
+the blog demonstrating the ability to
+
+00:00:11.890 --> 00:00:16.320
+translate from one language to another
+
+00:00:16.320 --> 00:00:21.580
+using Amazon Translate. Amazon Translate is a neural machine translation service that delivers fast, high-quality,
+
+00:00:21.580 --> 00:00:23.880
+and affordable language translation. 
+
+00:00:23.880 --> 00:00:27.280
+Neural machine translation is a form of language translation automation 
+
+00:00:27.280 --> 00:00:30.280
+that uses deep learning models to deliver more accurate and natural-sounding translation than traditional statistical and rule-based translation algorithms.
+
+00:00:30.280 --> 00:00:36.510
+The translation service is trained on a wide variety of content across different use cases and domains to perform well on many kinds of content.
+
+00:00:36.510 --> 00:00:38.870
+Its asynchronous batch processing capability enables you to translate a large collection of text or HTML documents with a single API call.

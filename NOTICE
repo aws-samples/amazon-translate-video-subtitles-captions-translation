@@ -1,0 +1,12 @@
+
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+**********************
+THIRD PARTY COMPONENTS
+**********************
+This software includes third party software subject to the following copyrights:
+
+urllib3 under the Massachusetts Institute of Technology (MIT) license
+boto3 under the Apache License Version 2.0
+webvtt-py under the Massachusetts Institute of Technology (MIT) license
+cfnresponse under the Amazon Software License(AmzSL)

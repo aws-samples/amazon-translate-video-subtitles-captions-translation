@@ -1,0 +1,19 @@
+1
+00:00:00,500 --> 00:00:07,000
+Hello. My name is John Doe. Welcome to the blog demonstrating the ability to
+
+2
+00:00:07,000 --> 00:00:11,890
+translate from one language to another using Amazon Translate. Amazon Translate is a neural machine translation service that delivers fast, high-quality,and affordable language translation. 
+
+3
+00:00:11,890 --> 00:00:16,320
+Neural machine translation is a form of language translation automation that uses deep learning models to deliver more accurate and natural-sounding translation than traditional statistical and rule-based translation algorithms.
+
+4
+00:00:16,320 --> 00:00:21,580
+The translation service is trained on a wide variety of content across different use cases and domains to perform well on many kinds of content.
+
+5
+00:00:21,580 --> 00:00:23,880
+Its asynchronous batch processing capability enables you to translate a large collection of text or HTML documents with a single API call. and Finally SGML stands for Standard Generalized Markup Language
