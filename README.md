@@ -11,7 +11,7 @@ The application uses several AWS resources, including AWS Lambda functions, AWS 
 Important: this application uses Amazon Translate and there are costs associated with this service after the Free Tier usage - please see the   [Amazon Translate pricing page](https://aws.amazon.com/translate/pricing/) for details.
 
 ### Reference
-[Translating Captions files with Amazon Translate](https://aws.amazon.com/blogs/machine-learning/translating-captions-files-using-amazon-translate/) 
+[Translating Captions files with Amazon Translate](https://aws.amazon.com/blogs/machine-learning/translate-video-captions-and-subtitles-using-amazon-translate/) 
 
 ## Solution Architecture
 <img src="solution.png" />
