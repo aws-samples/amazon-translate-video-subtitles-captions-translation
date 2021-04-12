@@ -71,6 +71,18 @@ Resources:
         Version: "2012-10-17"
         Statement:
           - Effect: Allow
+            Action:
+            - s3:ListBucket
+            Resource:
+              Fn::Join:
+              - ''
+              - - arn:aws:s3:::translate-captions-bucket-
+                - Fn::Select:
+                  - 2
+                  - Fn::Split:
+                    - /
+                    - Ref: AWS::StackId
+          - Effect: Allow
             Action: 
               - 's3:GetObject'
               - 's3:GetObjectAcl'
@@ -112,6 +124,18 @@ Resources:
         Version: "2012-10-17"
         Statement:
           - Effect: Allow
+            Action:
+            - s3:ListBucket
+            Resource:
+              Fn::Join:
+              - ''
+              - - arn:aws:s3:::translate-captions-bucket-
+                - Fn::Select:
+                  - 2
+                  - Fn::Split:
+                    - /
+                    - Ref: AWS::StackId
+          - Effect: Allow
             Action: 
               - 's3:GetObject'
               - 's3:GetObjectAcl'
@@ -133,7 +157,7 @@ Resources:
       # Function's execution role
       Policies:
         - AWSLambdaBasicExecutionRole
-        - AWSLambdaReadOnlyAccess
+        - AWSLambda_ReadOnlyAccess
         - AWSXrayWriteOnlyAccess
         - !Ref S3CaptionsFolderCreationPolicy
       Tracing: Active
@@ -169,7 +193,7 @@ Resources:
       # Function's execution role
       Policies:
         - AWSLambdaBasicExecutionRole
-        - AWSLambdaReadOnlyAccess
+        - AWSLambda_ReadOnlyAccess
         - AWSXrayWriteOnlyAccess
         - !Ref S3CaptionsFileTriggerEventProcessorPolicy
       Tracing: Active
@@ -201,7 +225,7 @@ Resources:
       # Function's execution role
       Policies:
         - AWSLambdaBasicExecutionRole
-        - AWSLambdaReadOnlyAccess
+        - AWSLambda_ReadOnlyAccess
         - AWSXrayWriteOnlyAccess
         - !Ref TranslateCaptionsJobSNSEventProcessorPolicy
       Tracing: Active
@@ -224,7 +248,7 @@ Resources:
       # Function's execution role
       Policies:
         - AWSLambdaBasicExecutionRole
-        - AWSLambdaReadOnlyAccess
+        - AWSLambda_ReadOnlyAccess
         - AWSXrayWriteOnlyAccess
         - !Ref TranslateCaptionsJobPollerPolicy
       Tracing: Active
