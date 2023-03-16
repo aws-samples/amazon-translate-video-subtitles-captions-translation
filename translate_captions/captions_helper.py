@@ -170,7 +170,7 @@ class Captions:
             self.logger.debug(srtcaption)
             caption["start"] = self.formatTimeVTTtoSeconds(srtcaption.start)
             caption["end"] = self.formatTimeVTTtoSeconds(srtcaption.end)
-            caption["caption"] = srtcaption.lines[0]
+            caption["caption"] = srtcaption.text
             self.logger.debug("Caption Object:{}".format(caption))
             captions.append(caption)
 
