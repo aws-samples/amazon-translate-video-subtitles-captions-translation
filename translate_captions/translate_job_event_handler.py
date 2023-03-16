@@ -1,13 +1,12 @@
 ## Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 ## SPDX-License-Identifier: MIT-0
-
 import json
 import logging
 import os
 import sys
 from urllib.parse import urlparse
 from botocore.exceptions import ClientError
-from helper import FileHelper,S3Helper
+from helper import FileHelper,S3Helper,AwsHelper
 from captions_helper import Captions
 
 logging.basicConfig(level=logging.DEBUG)
@@ -21,7 +20,7 @@ def processRequest(request):
     jobid =  request["jobId"]
     bucketName = up.netloc
     objectkey = up.path.lstrip('/')
-    basePrefixPath = objectkey  + accountid + "-TranslateText-" + jobid + "/";
+    basePrefixPath = objectkey 
     languageCode = request["langCode"]
     logger.debug("Base Prefix Path:{}".format(basePrefixPath))
     captions = Captions()
@@ -32,7 +31,7 @@ def processRequest(request):
             #Read the Delimited file contents
             content = S3Helper().readFromS3(bucketName,obj)
             fileName = FileHelper().getFileName(obj)
-            sourceFileName = FileHelper().getFileName(obj.replace("{}.".format(languageCode),""))
+            sourceFileName = FileHelper().getFileName(obj.replace("{}.".format(languageCode),"",1))
             logger.debug("SourceFileKey:{}.processed".format(sourceFileName))
             soureFileKey = "input/{}.processed".format(sourceFileName)
             vttObject = {}
@@ -85,14 +84,17 @@ def lambda_handler(event, context):
     message ="success"
     request["delete_captionsin"] = os.environ["DELETE_INTERMEDIATE_FILES"]
     try:
-        message = json.loads(event['Records'][0]['Sns']['Message'])
-        request["s3uri"] =  message['S3OutputLocation']
-        request["jobId"] = message['JobId']
-        request["jobName"] = message['JobName']
-        status = message['JobStatus']
-        request["langCode"] = message['langCode'][0]
+        jobId = event["detail"]["jobId"]
+        translate_client = AwsHelper().getClient('translate')
+        response = translate_client.describe_text_translation_job(JobId=jobId)
+        logger.info("response: {}".format(response))
+        request["s3uri"] =  response['TextTranslationJobProperties']['OutputDataConfig']['S3Uri']
+        request["jobId"] = response['TextTranslationJobProperties']['JobId']
+        request["jobName"] = response['TextTranslationJobProperties']['JobName']
+        status = response['TextTranslationJobProperties']['JobStatus']
+        request["langCode"] = response['TextTranslationJobProperties']['TargetLanguageCodes'][0]
         request["accountId"] = context.invoked_function_arn.split(":")[4]
-        if status == "COMPLETED" :
+        if status == "COMPLETED" and 'TranslateJob-captions' in response['TextTranslationJobProperties']['JobName'] :
             processRequest(request)
         elif status in ["FAILED", "COMPLETED_WITH_ERROR"]:
             statusCode ="500"
